@@ -1,0 +1,29 @@
+{
+  "name": "portal-legislativ",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/*' dev",
+    "build": "pnpm --filter './packages/*' build && pnpm --parallel --filter './apps/*' build",
+    "lint": "pnpm --parallel --filter './apps/*' lint",
+    "test": "pnpm --parallel --filter './apps/*' test"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "prettier": "^3.3.3",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0"
+  },
+  "engines": { "node": ">=20.0.0", "pnpm": ">=9.0.0" },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@prisma/client",
+      "@prisma/engines",
+      "bcrypt",
+      "esbuild",
+      "prisma",
+      "puppeteer",
+      "unrs-resolver"
+    ]
+  }
+}

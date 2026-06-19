@@ -1,0 +1,216 @@
+/* ─── Footer — Unitar Design System ─── */
+
+.footer {
+  background-color: color-mix(in srgb, var(--blue-sky-900) 78%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid color-mix(in srgb, var(--white) 8%, transparent);
+  color: color-mix(in srgb, var(--white) 65%, transparent);
+  margin-top: auto;
+}
+
+/* ─── Main footer body ─── */
+.body {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 1rem;
+}
+
+@media (min-width: 992px) {
+  .body { padding: 48px 2rem; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 992px) {
+  .grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; }
+}
+
+/* ─── Brand column ─── */
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.brandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--blue-sky-600) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blue-sky-600) 28%, transparent);
+  color: var(--blue-sky-300);
+  flex-shrink: 0;
+}
+
+.brandTitle {
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.brandSubtitle {
+  font-size: 11px;
+  color: color-mix(in srgb, var(--white) 45%, transparent);
+  margin-top: 2px;
+}
+
+.brandDesc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--white) 55%, transparent);
+}
+
+/* ─── Link columns ─── */
+.colTitle {
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linkList li { font-size: 13px; }
+
+.link {
+  color: var(--white-500-alpha);
+  text-decoration: none;
+  transition: color var(--motion-duration-md);
+}
+
+.link:hover {
+  color: var(--white);
+}
+
+/* ─── Contact column ─── */
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.contactIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--blue-sky-400);
+}
+
+.contactLink {
+  color: var(--white-500-alpha);
+  text-decoration: none;
+  transition: color var(--motion-duration-md);
+}
+
+.contactLink:hover {
+  color: var(--white);
+}
+
+/* ─── External links ─── */
+.extLinksSection {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--blue-sky-800) 40%, transparent);
+}
+
+.extLinksLabel {
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white-400-alpha);
+  margin-bottom: 8px;
+}
+
+.extLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.extLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--white) 55%, transparent);
+  text-decoration: none;
+  transition: color var(--motion-duration-md);
+}
+
+.extLink:hover {
+  color: var(--white);
+}
+
+.extLinkIcon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--white-400-alpha);
+}
+
+/* ─── Bottom bar ─── */
+.bottomBar {
+  border-top: 1px solid color-mix(in srgb, var(--blue-sky-800) 40%, transparent);
+}
+
+.bottomBarInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--white-400-alpha);
+}
+
+@media (min-width: 576px) {
+  .bottomBarInner {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px 2rem;
+  }
+}
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.legalLink {
+  color: var(--white-400-alpha);
+  text-decoration: none;
+  transition: color var(--motion-duration-md);
+}
+
+.legalLink:hover {
+  color: color-mix(in srgb, var(--white) 70%, transparent);
+}

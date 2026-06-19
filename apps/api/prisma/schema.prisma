@@ -1,0 +1,198 @@
+// Portal Legislativ — Prisma Schema
+// PostgreSQL 16 + Prisma 5.x
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── ENUMS ────────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  USER
+  OPERATOR
+  MODERATOR
+  ADMIN
+}
+
+enum DocumentStatus {
+  INCOMPLET
+  IN_ASTEPTARE
+  APROBAT
+  DEZAPROBAT
+  STERS
+}
+
+enum DocLegalStatus {
+  IN_VIGOARE
+  ABROGAT
+  SUSPENDAT
+}
+
+// ─── MODELS ───────────────────────────────────────────────────────────────────
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
+  role      UserRole @default(USER)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favorites     Favorite[]
+  documentLogs  DocumentLog[]
+  userLogs      UserLog[]
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model DocumentType {
+  id        Int        @id @default(autoincrement())
+  nameRo    String     @unique
+  nameRu    String?
+  sortOrder Int        @default(0)
+  documents Document[]
+
+  @@map("document_types")
+}
+
+model Emitent {
+  id        Int        @id @default(autoincrement())
+  nameRo    String
+  nameRu    String?
+  category  String?
+  parentId  Int?
+  documents Document[]
+
+  @@map("emitents")
+}
+
+model PublicationStatus {
+  id        Int        @id @default(autoincrement())
+  nameRo    String     @unique
+  nameRu    String?
+  documents Document[]
+
+  @@map("publication_statuses")
+}
+
+model Document {
+  id                  Int            @id @default(autoincrement())
+  titleRo             String
+  titleRu             String?
+  titlePrevRo         String?
+  titlePrevRu         String?
+  bodyRo              String         @db.Text
+  bodyRu              String?        @db.Text
+  amendmentsRo        String?        @db.Text
+  amendmentsRu        String?        @db.Text
+  number              String
+  articleNumber       String?
+  moNumber            String?
+  dateIssued          DateTime
+  datePublished       DateTime?
+  version             Int            @default(1)
+  parentId            Int?
+  status              DocumentStatus @default(INCOMPLET)
+  legalStatus         DocLegalStatus @default(IN_VIGOARE)
+  repealedById        Int?
+  typeId              Int
+  emitentId           Int
+  publicationStatusId Int?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  createdById         Int?
+  deletedAt           DateTime?
+
+  type              DocumentType       @relation(fields: [typeId], references: [id])
+  emitent           Emitent            @relation(fields: [emitentId], references: [id])
+  publicationStatus PublicationStatus? @relation(fields: [publicationStatusId], references: [id])
+  favorites         Favorite[]
+  logs              DocumentLog[]
+
+  @@index([number])
+  @@index([typeId])
+  @@index([emitentId])
+  @@index([status])
+  @@index([legalStatus])
+  @@index([dateIssued])
+  @@index([parentId])
+  @@map("documents")
+}
+
+model Favorite {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  documentId Int
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, documentId])
+  @@map("favorites")
+}
+
+model DocumentLog {
+  id         Int      @id @default(autoincrement())
+  documentId Int
+  userId     Int?
+  action     String
+  details    Json?
+  createdAt  DateTime @default(now())
+
+  document Document @relation(fields: [documentId], references: [id])
+  user     User?    @relation(fields: [userId], references: [id])
+
+  @@index([documentId])
+  @@index([userId])
+  @@map("document_logs")
+}
+
+model UserLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  action    String
+  ipAddress String?
+  userAgent String?
+  details   Json?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("user_logs")
+}
+
+model SystemConstant {
+  id        Int      @id @default(autoincrement())
+  keyName   String   @unique
+  valueRo   String   @db.Text
+  valueRu   String?  @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("system_constants")
+}

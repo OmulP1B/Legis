@@ -1,0 +1,89 @@
+/* ─── StatsBar — Unitar Design System ─── */
+
+.bar {
+  border-bottom: 1px solid color-mix(in srgb, var(--white) 15%, transparent);
+  background-color: var(--white-200-alpha);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 992px) {
+  .inner { padding: 0 2rem; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── Stat item ─── */
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--white-200-alpha);
+}
+
+@media (min-width: 768px) {
+  .statItem {
+    border-bottom: none;
+    border-right: 1px solid var(--white-200-alpha);
+  }
+  .statItem:last-child {
+    border-right: none;
+  }
+}
+
+.statItem:nth-child(-n+2) {
+  border-bottom: 1px solid var(--white-200-alpha);
+}
+
+@media (min-width: 768px) {
+  .statItem:nth-child(-n+2) {
+    border-bottom: none;
+  }
+}
+
+/* ─── Icon wrapper ─── */
+.iconWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--white) 12%, transparent);
+}
+
+.iconBlue    { color: var(--blue-sky-300); }
+.iconApricot { color: var(--apricot-300); }
+.iconGreen   { color: var(--green-300); }
+.iconSky     { color: var(--blue-sky-200); }
+
+/* ─── Stat text ─── */
+.value {
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  font-feature-settings: 'tnum';
+  line-height: 1.1;
+}
+
+.label {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--white) 65%, transparent);
+  margin-top: 2px;
+  line-height: 1.3;
+}

@@ -1,0 +1,178 @@
+/* ─── RecentDocuments — glassmorphism transparent ─── */
+
+.wrapper {}
+
+/* ─── Section header ─── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: var(--text-heading-h5-2xs-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+}
+
+.viewAll {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--font-weight-semibold);
+  color: var(--blue-sky-300);
+  text-decoration: none;
+  transition: color var(--motion-duration-md);
+}
+
+.viewAll:hover {
+  color: var(--blue-sky-200);
+}
+
+.viewAllIcon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── List container ─── */
+.list {
+  border-radius: 10px;
+  border: 1px solid var(--white-200-alpha);
+  background-color: color-mix(in srgb, var(--white) 6%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+/* ─── Document item ─── */
+.docItem {
+  display: block;
+  padding: 14px 18px;
+  border-bottom: 1px solid color-mix(in srgb, var(--white) 7%, transparent);
+  transition: background-color var(--motion-duration-md);
+  cursor: pointer;
+}
+
+.docItem:last-child {
+  border-bottom: none;
+}
+
+.docItem:hover {
+  background-color: color-mix(in srgb, var(--white) 8%, transparent);
+}
+
+.docItemEven {
+  background-color: color-mix(in srgb, var(--white) 3%, transparent);
+}
+
+.docRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+/* ─── Number badge ─── */
+.docNumBadge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--blue-sky-600) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blue-sky-600) 40%, transparent);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: var(--blue-sky-200);
+  font-feature-settings: 'tnum';
+  margin-top: 2px;
+}
+
+/* ─── Doc body ─── */
+.docBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.docMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.docTitle {
+  font-size: var(--text-body-sm-font-size);
+  font-weight: var(--font-weight-semibold);
+  color: color-mix(in srgb, var(--white) 90%, transparent);
+  line-height: 1.4;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--motion-duration-md);
+}
+
+.docItem:hover .docTitle {
+  color: var(--blue-sky-200);
+}
+
+.docFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: color-mix(in srgb, var(--white) 45%, transparent);
+}
+
+.docFooterItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.docFooterIcon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.docNumber {
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+}
+
+/* ─── External link icon ─── */
+.docExtIcon {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: color-mix(in srgb, var(--white) 30%, transparent);
+  opacity: 0;
+  transition: opacity var(--motion-duration-md), color var(--motion-duration-md);
+  text-decoration: none;
+}
+
+.docItem:hover .docExtIcon {
+  opacity: 1;
+  color: var(--blue-sky-300);
+}
+
+/* ─── Status chip ─── */
+.statusActive {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  background-color: color-mix(in srgb, var(--green-600) 20%, transparent);
+  color: var(--green-300);
+  border: 1px solid color-mix(in srgb, var(--green-600) 30%, transparent);
+}
